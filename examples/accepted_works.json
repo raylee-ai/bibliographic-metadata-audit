@@ -1,0 +1,20 @@
+[
+  {
+    "id": "https://openalex.org/W2152126086",
+    "display_name": "The cultural evolution of prosocial religions",
+    "doi": "https://doi.org/10.1017/s0140525x14001356",
+    "referenced_works": [
+      "https://openalex.org/W621128614",
+      "https://openalex.org/W1481402319"
+    ]
+  },
+  {
+    "id": "https://openalex.org/W2128261329",
+    "display_name": "The evolution of costly displays, cooperation and religion",
+    "doi": "https://doi.org/10.1016/j.evolhumbehav.2009.03.005",
+    "referenced_works": [
+      "https://openalex.org/W621128614",
+      "https://openalex.org/W1481402319"
+    ]
+  }
+]
