@@ -60,3 +60,5 @@ In this sample the filter removed **208 of 3,132 distinct cited IDs** and **232 
 ~~~sh
 python3 -m unittest -v
 ~~~
+
+See the [reproduction guide](docs/REPRODUCING.md) for expected example results, exit codes and the scope of the bundled evidence.
