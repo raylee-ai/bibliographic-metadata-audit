@@ -33,15 +33,15 @@ The filtered example loses these pairs:
 | `W2128261329` | `W621128614` |
 | `W2152126086` | `W621128614` |
 
-The [CI workflow](../.github/workflows/ci.yml) runs the existing tests on Python 3.10 and checks each example's exit code and report counts. It runs for pull requests and pushes to `main`.
+The [CI workflow](../.github/workflows/ci.yml) runs the existing tests on Python 3.10 and checks each example's exit code, pair counts and exact lists of lost and added pairs. It runs for pull requests and pushes to `main`.
 
 ## Input and output contract
 
-- The before snapshot can be CSV or UTF-8 OpenAlex JSON: a single work, an array of works or an object containing a `results` array.
-- CSV inputs need `document_id` and `reference_id` columns.
+- The program reads the before snapshot as UTF-8 OpenAlex JSON only when the file extension is `.json` (case-insensitive). For every other extension, or no extension, it reads CSV. The JSON input can be a single work, an array of works or an object containing a `results` array.
+- The after snapshot must be CSV. CSV inputs need `document_id` and `reference_id` columns.
 - OpenAlex work records need an `id` and a `referenced_works` array. An empty array contributes zero pairs; a missing or null array is an input error.
 - A full OpenAlex work URL and its bare work ID are normalized to the same identifier. Duplicate pairs count once.
-- The JSON report contains pair counts plus `lost` and `added` lists.
+- The JSON report gives pair counts in `before_edges`, `after_edges`, `lost_edges` and `added_edges`. The `lost` and `added` lists contain the corresponding pairs. Each list element is an object with `document_id` and `reference_id` fields.
 
 | Exit code | Meaning |
 | --- | --- |

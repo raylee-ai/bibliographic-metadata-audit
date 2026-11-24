@@ -32,11 +32,15 @@ jobs:
           import sys
 
           keys = ("before_edges", "after_edges", "lost_edges", "added_edges")
+          filtered_lost = [
+              {"document_id": "W2128261329", "reference_id": "W621128614"},
+              {"document_id": "W2152126086", "reference_id": "W621128614"},
+          ]
           cases = (
-              ("filtered.csv", 1, (4, 2, 2, 0)),
-              ("preserved.csv", 0, (4, 4, 0, 0)),
+              ("filtered.csv", 1, (4, 2, 2, 0), filtered_lost),
+              ("preserved.csv", 0, (4, 4, 0, 0), []),
           )
-          for filename, expected_exit, expected_counts in cases:
+          for filename, expected_exit, expected_counts, expected_lost in cases:
               result = subprocess.run(
                   [
                       sys.executable,
@@ -57,4 +61,8 @@ jobs:
               counts = tuple(report[key] for key in keys)
               if counts != expected_counts:
                   raise SystemExit(f"{filename}: unexpected counts {counts}")
+              if report["lost"] != expected_lost:
+                  raise SystemExit(f"{filename}: unexpected lost pairs {report['lost']!r}")
+              if report["added"] != []:
+                  raise SystemExit(f"{filename}: unexpected added pairs {report['added']!r}")
               print(f"{filename}: exit {expected_exit}, counts {counts}; OK")
